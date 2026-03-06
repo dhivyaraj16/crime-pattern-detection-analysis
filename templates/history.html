@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction History</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="analysis-body">
+
+<div class="analysis-container">
+
+    <h1>📜 Prediction History</h1>
+
+    {% if data %}
+
+    <table class="history-table">
+
+        <tr>
+            <th>Date & Time</th>
+            <th>Year</th>
+            <th>Predicted Crimes</th>
+        </tr>
+
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+        <p>No predictions yet.</p>
+    {% endif %}
+
+    <br>
+
+    <a href="/analysis">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

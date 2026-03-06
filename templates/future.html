@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Future Crime Prediction</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="gradient-purple">
+
+<div class="form-card">
+
+    <h2>🔮 Future Crime Prediction</h2>
+
+    <!-- ================= FORM ================= -->
+
+    <form method="POST" action="/future">
+
+        <select id="state" name="state" onchange="loadDistricts()" required>
+            <option value="">Select State</option>
+        </select>
+
+        <select id="district" name="district" required>
+            <option value="">Select District</option>
+        </select>
+
+        <select id="crime" name="crime" required>
+            <option value="">Select Crime Type</option>
+        </select>
+
+        <select name="year" required>
+            <option value="">Select Future Year</option>
+            {% for y in years %}
+            <option value="{{ y }}">{{ y }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn purple">
+            RETRO PROJECTION
+        </button>
+
+    </form>
+
+    <!-- ================= RESULT ================= -->
+
+    {% if predicted is defined %}
+
+    <hr>
+
+    <div class="result-box">
+
+        <h3>📍 Location Crime Risk Report</h3>
+        <p><b>Foresight Crime in the Year of</b> {{ year }}</p>
+
+
+        <p><b>State:</b> {{ state }}</p>
+        <p><b>District:</b> {{ district }}</p>
+        <p><b>Crime:</b> {{ crime }}</p>
+        
+        <hr>
+
+        <p><b>Predicted Crime Count:</b> {{ predicted }}</p>
+
+        <p><b>Crime Chance:</b> {{ risk_percent }}%</p>
+
+        <p><b>Risk Level:</b> {{ risk }}</p>
+
+        <p><b>Trend:</b> {{ trend }}</p>
+
+        <hr>
+
+        <h3>🏆 Top 5 Crimes in This Area</h3>
+    
+        <div class="Top 5 Crimes">
+        {% for c in top_crimes %}
+            <p>{{ c }}</p>
+        {% endfor %}
+        </div>
+        
+
+
+
+        <hr>
+
+        <h3>🛡️ Public Prevention Methods</h3>
+         <div class="public prevention">
+            {% for p in public %}
+        
+            <p>{{ p }}</p>
+        {% endfor %}
+        </div>
+        
+
+
+        <hr>
+
+        <h3>🚓 Police Prevention Plan</h3>
+           <div class="police plan">
+            {% for p in police %}
+        
+            <p>{{ p }}</p>
+        {% endfor %}
+        </div>
+
+        
+
+    </div>
+
+    {% endif %}
+
+    <hr>
+
+    <a href="/dashboard" class="btn back-btn">
+        ⬅ Back to Dashboard
+    </a>
+
+</div>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crime Intelligence Dashboard</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+
+<div class="sidebar">
+
+    <h2 class="logo">⚖ CRIMINOMETRICS</h2>
+
+    <a href="/dashboard" class="active">
+        <i class="fas fa-home"></i> Dashboard
+    </a>
+
+    <a href="/current">
+        <i class="fas fa-search"></i> Retrospective
+    </a>
+
+    <a href="/future">
+        <i class="fas fa-chart-line"></i> Prospective
+    </a>
+
+    <a href="/analysis">
+        <i class="fas fa-chart-bar"></i> Chart Visualization
+    </a>
+
+    
+
+    <a href="/logout" class="logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="main-content">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>Crime Pattern Detection & Analysis System</h1>
+
+        <div class="user-box">
+            <div class="avatar">A</div>
+            <span>Admin</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= STATS ================= -->
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h4>Total States</h4>
+            <h2>{{ total_states }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Total Districts</h4>
+            <h2>{{ total_districts }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Crime Types</h4>
+            <h2>{{ total_crime_types }}</h2>
+        </div>
+
+        <div class="stat-card">
+            <h4>Dataset Years</h4>
+            <h2>{{ start_year }} - {{ end_year }}</h2>
+        </div>
+
+    </div>
+
+
+    <!-- ================= FEATURE CARDS ================= -->
+
+    <div class="features-grid">
+
+        <a href="/current" class="feature-card">
+
+            <h3>🔍 RETROSPECTIVE CRIME ANALYSIS</h3>
+
+            <p>
+                Predict crimes for a selected year using historical data.
+            </p>
+
+        </a>
+
+
+        <a href="/future" class="feature-card">
+
+            <h3>📈 PROSPECTIVE CRIME ANALYSIS</h3>
+
+            <p>
+                Forecast future crime risks using ML logic.
+            </p>
+
+        </a>
+
+        <a href="/upload" class="feature-card">
+            <h3>📂 NEW CSV FLLE </h3>
+            <p>Upload new file here and find your pattern</p>
+        </a>
+        
+        
+        <a href="/analysis" class="feature-card">
+
+            <h3>📊 CRIME TREND VIEW</h3>
+
+            <p>
+                Visualize trends, hotspots and distributions.
+            </p>
+
+        </a>
+
+
+        
+
+    </div>
+
+
+</div>
+
+</body>
+</html>
+

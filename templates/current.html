@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Crime Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="gradient-dashboard">
+
+<div class="form-card glass">
+
+    <h2>🔍 Crime Insight Analysis</h2>
+
+    <form method="POST" action="/current">
+
+        <select id="state" name="state" onchange="loadDistricts()" required>
+            <option value="">Select State</option>
+        </select>
+
+        <select id="district" name="district" required>
+            <option value="">Select District</option>
+        </select>
+
+        <select id="crime" name="crime" required>
+            <option value="">Select Crime Type</option>
+        </select>
+
+        <select name="year" required>
+            <option value="">Select Year</option>
+            {% for y in years %}
+            <option value="{{ y }}">{{ y }}
+            </option> 
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn blue">RETROSPECT</button>
+    </form>
+
+    {% if predicted_count is defined %}
+    <hr>
+
+    <h3>📊 Prediction Summary</h3>
+    <p><b>Crime rate in the Year of </b> {{ year }}</p>
+
+    <p><b>State:</b> {{ state }}</p>
+    <p><b>District:</b> {{ district }}</p>
+    <p><b>Crime:</b> {{ crime }}</p>
+    
+
+    <div class="highlight-box">
+        <h3>Crime Count Prediction: {{ predicted_count }}</h3>
+        <h3>Severity: {{ severity }}</h3>
+        
+        <h3>Trend: {{ trend }}</h3>
+        <h3>Anomaly: {{ anomaly }}</h3>
+        <h3>Hotspot: {{ hotspot }}</h3>
+        <h3>Risk Level: {{ risk }}</h3>
+        <h3>Patrol Plan: {{ patrol }}</h3>
+
+
+  
+    
+            <div class="result-box" style="
+            background: rgba(255,255,255,0.15);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            color: white;
+            text-align: left;
+        ">
+
+            <h2>🛡 Prevention Measures</h2>
+            {% for p in prevention  %}
+
+            <p>{{ p }}</p>
+            {% endfor %}
+
+            <h2>🚔 Police Deployment</h2>
+            <p>{{ police_deployment }}</p>
+
+            <h2>⚠ Safety Advice</h2>
+            <p>{{ safety_advice }}</p>
+
+            </div>
+            
+       
+    
+
+
+         
+    <form method="GET" action="/trend">
+        <input type="hidden" name="state" value="{{ state }}">
+        <input type="hidden" name="district" value="{{ district }}">
+        <input type="hidden" name="crime" value="{{ crime }}">
+        <button onclick="toggleChart()" class="trend-btn">
+            📈 CHART
+        </button>
+        
+    
+
+    
+
+   
+ 
+
+    
+    </div>
+    
+    <div id="trend-chart"
+    data-years='{{ trend_years|tojson }}'
+    data-values='{{ trend_values|tojson }}'
+    
+     data-state='{{ state }}'
+     data-district='{{ district }}'
+     data-crime='{{ crime }}'
+     style="height:350px;margin-top:20px;">
+</div>
+
+    {% endif %}
+
+    <a href="/dashboard" class="back-btn">⬅ Back to Dashboard</a>
+
+</div>
+
+<!-- Plotly -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<!-- Script -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<script>
+    function toggleChart() {
+    
+        var box = document.getElementById("trendChartBox");
+    
+        if (box.style.display === "none") {
+            box.style.display = "block";
+        } else {
+            box.style.display = "none";
+        }
+    }
+    </script>
+    
+</body>
+</html>
+
